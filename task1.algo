@@ -1,0 +1,79 @@
+// FUNCTION is_separator
+
+FUNCTION is_separator(d:CHAR) : BOOLEAN
+
+
+BEGIN
+    IF (d=' ' or d=',' or d='.' or d= ';') THEN
+        RETURN TRUE;
+    ELSE
+    RETURN false;
+    END_IF
+    
+END
+
+// function is_letter
+
+FUNCTION is_letter(d: CHAR) : BOOLEAN
+
+BEGIN
+    IF (d>= 'a' AND d<= 'z' or d>= 'A' AND d<= 'Z') THEN
+        RETURN TRUE;
+        ELSE
+        RETURN false;
+    END_IF
+   
+END
+
+// function is_digit
+
+FUNCTION is_digit(d:CHAR) : BOOLEAN
+
+
+BEGIN
+    
+    IF (d>='0' AND d<= '9') THEN
+        
+        RETURN TRUE;
+        ELSE
+        RETURN false;
+    END_IF
+   
+END
+
+// now..our algorithm
+
+ALGORITHM sentence
+VAR
+    nb_letter, nb_separator, nb_digit, nb_other: INTEGER :=0;
+    c: CHAR:='';
+
+BEGIN
+    
+    WHILE (c<> '#') DO
+        
+        IF (is_digit(c:CHAR)) THEN
+            
+            nb_digit:= nb_digit+1;
+
+        ELSE_IF (is_letter(c: CHAR)) THEN
+
+        nb_letter:= nb_letter+1;
+
+        ELSE_IF (is_separator(c: CHAR)) THEN
+
+        nb_separator:= nb_separator+1;
+
+        ELSE
+           nb_other:= nb_other+1;
+        END_IF
+    END_WHILE
+
+    write(nb_digit)
+    write(nb_letter)
+    write(nb_other)
+    write(nb_separator)
+END
+
+
+
