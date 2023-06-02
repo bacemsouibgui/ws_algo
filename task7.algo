@@ -1,0 +1,55 @@
+FUNCTION anagram(wrd1, wrd2: STRING) : BOOLEAN
+VAR
+    
+    first, second: HASH_TABLE<CHAR,INTEGER> // we will calculate the frequency for each character
+    keys_first, keys_second  : ARRAY_OF CHAR[n];
+    i, count : INTEGER;
+    
+BEGIN
+    
+    // calculate frequency of the first STRING
+
+    FOR i FROM 0 TO wrd1.length-1  DO
+        
+        IF (first.lookup(wrd1[i]= TRUE)) THEN
+            
+            count:= first.get(wrd1[i]);
+            first.insert(wrd1[i], count+1);
+            ELSE
+            first.insert(wrd1[i], 1);
+        END_IF
+    END_FOR
+    
+    // calculate frequency of the second STRING
+
+     FOR i FROM 0 TO wrd2.length-1  DO
+        
+        IF (second.lookup(wrd2[i]= TRUE)) THEN
+            
+            count:= second.get(wrd2[i]);
+            second.insert(wrd2[i], count+1);
+            ELSE
+            second.insert(wrd2[i], 1);
+        END_IF
+    END_FOR
+
+    keys_first:= first.getKeys()
+    keys_second: = second.getKeys();
+    
+    // we will compare the frequency
+    IF (keys_first.length= keys_second.length) THEN
+        
+        i:=0;
+        WHILE (i<keys_first.length) DO
+            IF (first.get(keys_first[i])<>second.get(keys_first[i])) THEN
+                
+                return FALSE
+            END_IF
+            i: i+1;
+        END_WHILE
+
+        ELSE
+        return FALSE;
+    END_IF
+END
+
